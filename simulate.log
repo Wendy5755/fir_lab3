@@ -1,0 +1,61 @@
+Time resolution is 1 ps
+------------Start simulation-----------
+----Start the data input(AXI-Stream)----
+----Start the coefficient input(AXI-lite)----
+[PASS] [Pattern          0] Golden answer:           0, Your answer:           0
+[ERROR] [Pattern          1] Golden answer:         -10, Your answer:           0
+[ERROR] [Pattern          3] Golden answer:         -25, Your answer:           0
+[ERROR] [Pattern          4] Golden answer:          35, Your answer:           0
+[ERROR] [Pattern          6] Golden answer:         337, Your answer:           0
+[ERROR] [Pattern          8] Golden answer:         732, Your answer:           0
+[ERROR] [Pattern          9] Golden answer:         915, Your answer:           0
+[ERROR] [Pattern         11] Golden answer:        1281, Your answer:           0
+ Check Coefficient ...
+[ERROR] [Pattern          1] Golden answer:         -10, Your answer:           0
+[ERROR] [Pattern          2] Golden answer:         -29, Your answer:           0
+OK: exp =           0, rdata =           0
+[ERROR] [Pattern          4] Golden answer:          35, Your answer:           0
+[ERROR] [Pattern          5] Golden answer:         158, Your answer:           0
+OK: exp =          23, rdata =           x
+[ERROR] [Pattern          7] Golden answer:         539, Your answer:           0
+[ERROR] [Pattern          8] Golden answer:         732, Your answer:           0
+OK: exp =          56, rdata =           x
+[ERROR] [Pattern         10] Golden answer:        1098, Your answer:           0
+[ERROR] [Pattern         11] Golden answer:        1281, Your answer:           0
+OK: exp =         -10, rdata =           x
+ Tape programming done ...
+ Start FIR
+[ERROR] [Pattern         13] Golden answer:        1647, Your answer:           0
+[ERROR] [Pattern         14] Golden answer:        1830, Your answer:           0
+----End the coefficient input(AXI-lite)----
+[ERROR] [Pattern         15] Golden answer:        2013, Your answer:           0
+[ERROR] [Pattern         16] Golden answer:        2196, Your answer:           0
+[ERROR] [Pattern         17] Golden answer:        2379, Your answer:           0
+[ERROR] [Pattern         18] Golden answer:        2562, Your answer:           0
+[ERROR] [Pattern         19] Golden answer:        2745, Your answer:           0
+[ERROR] [Pattern         20] Golden answer:        2928, Your answer:           0
+[ERROR] [Pattern         21] Golden answer:        3111, Your answer:           0
+[ERROR] [Pattern         22] Golden answer:        3294, Your answer:           0
+[ERROR] [Pattern         23] Golden answer:        3477, Your answer:           0
+[ERROR] [Pattern         24] Golden answer:        3660, Your answer:           0
+[ERROR] [Pattern         25] Golden answer:        3843, Your answer:           0
+[ERROR] [Pattern         26] Golden answer:        4026, Your answer:           0
+[ERROR] [Pattern         27] Golden answer:        4209, Your answer:           0
+[ERROR] [Pattern         28] Golden answer:        4392, Your answer:           0
+[ERROR] [Pattern         29] Golden answer:        4575, Your answer:           0
+[ERROR] [Pattern         30] Golden answer:        4758, Your answer:           0
+[ERROR] [Pattern         31] Golden answer:        4941, Your answer:           0
+[ERROR] [Pattern         32] Golden answer:        5124, Your answer:           0
+[ERROR] [Pattern         33] Golden answer:        5307, Your answer:           0
+[ERROR] [Pattern         34] Golden answer:        5490, Your answer:           0
+[ERROR] [Pattern         35] Golden answer:        5673, Your answer:           0
+[ERROR] [Pattern         36] Golden answer:        5856, Your answer:           0
+[ERROR] [Pattern         37] Golden answer:        6039, Your answer:           0
+[ERROR] [Pattern         38] Golden answer:        6222, Your answer:           0
+[ERROR] [Pattern         39] Golden answer:        6405, Your answer:           0
+[ERROR] [Pattern         40] Golden answer:        6588, Your answer:           0
+[ERROR] [Pattern         41] Golden answer:        6771, Your answer:           0
+[ERROR] [Pattern         42] Golden answer:        6954, Your answer:           0
+[ERROR] [Pattern         43] Golden answer:        7137, Your answer:           0
+[ERROR] [Pattern         44] Golden answer:        7320, Your answer:           0
+[ERROR] [Pattern         45] Golden answer:        7503, Your answer:           0
