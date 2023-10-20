@@ -44,11 +44,12 @@ module fir
    );
 
 //fir EN
-wire firEN;
-reg firEN_temp;
-assign firEN = firEN_temp;
+wire fir_sign;
+reg fir_sign_temp;
+assign fir_sign = fir_sign_temp;
 
 wire ftap_ready, ftap_valid;
+wire firEN;
 assign firEN = ftap_valid & ftap_ready;
 reg ftap_ready_temp;
 
@@ -66,11 +67,12 @@ assign firc = firc_temp;
 
 reg [pADDR_WIDTH-1:0]ftlast_addr_temp;
 
+
 always@(posedge axis_clk) begin
     if (!axis_rst_n) begin
         fd_addr_temp <= 0;
         ft_addr_temp <= 0;
-        firEN_temp <= 0;
+        fir_sign_temp <= 0;
         ftap_valid_temp <= 0;
         firc_temp <= 0;
     end
@@ -97,11 +99,12 @@ always@(posedge axis_clk) begin
 
 		end
 
-        firc_temp <= 1;
+        	fir_sign_temp <= 1;
     end
     else begin
+	fir_sign_temp <= 0;
         ftap_valid_temp <= 1;
-        firc_temp <= 0;
+        
     end
 end
 
@@ -219,6 +222,7 @@ reg [pADDR_WIDTH-1:0] tap_wa_temp;
 reg [pDATA_WIDTH-1:0] tap_Di_temp;
 assign tap_wa = tap_wa_temp;
 assign tap_Di = tap_Di_temp;
+assign tap_WE = {4{awready & wready}};
 reg ap_start_on;
 
 always @( posedge axis_clk ) begin
@@ -243,10 +247,11 @@ always @( posedge axis_clk ) begin
 
         if (!wready && wvalid) begin
             wready_temp <= 1;
-	    if(awaddr==0 && wdata==1)
-                ap_start_on <= 1;
-            else if(awaddr>=12'h20 && awaddr<=12'h60)//12~60
+	    if(awaddr>=12'h20 && awaddr<=12'h60)//12~60
                 tap_Di_temp <= wdata;
+	    else if(awaddr==0 && wdata==1)
+                ap_start_on <= 1;
+            
             
 
         end
@@ -356,28 +361,28 @@ always @( posedge axis_clk ) begin
         end
     end
 end
-reg [pDATA_WIDTH-1:0] data_in_temp;
-assign data_in = data_in_temp ;
+reg [pDATA_WIDTH-1:0] rdata_temp;
+assign rdata = rdata_temp ;
 
 always@(*) begin
       		//pre
             if(araddr==0 && rvalid)
-                data_in_temp =32'h00;
+                rdata_temp =32'h00;
             else if(araddr==0 && rvalid && ap_start_on)
-                data_in_temp =32'h01;//at wa[1]
+                rdata_temp =32'h01;//at wa[1]
             else
-                data_in_temp = tap_Do;
+                rdata_temp = tap_Do;
       		//start
             if(araddr==0 && rvalid)
-                data_in_temp =32'h00;//at wa[0]
+                rdata_temp =32'h00;//at wa[0]
             else
-                data_in_temp = tap_Do;
+                rdata_temp = tap_Do;
 
         	//done
             if(araddr==0 && rvalid)
-                data_in_temp =32'h06;//at wa[6]
+                rdata_temp =32'h06;//at wa[6]
             else
-                data_in_temp = tap_Do;
+                rdata_temp = tap_Do;
     
 end
 
@@ -394,21 +399,24 @@ assign next_ramd = data_Do;
 assign next_cofd = tap_Do;
 
 always@(posedge axis_clk) begin
-    if(firEN) begin
+    if(fir_sign) begin
         last_ramd_temp <= next_ramd;
         last_cofd_temp <= next_cofd;
     end
 end
 
-assign ramd = ~firEN ?  last_ramd : next_ramd;
-assign cofd = ~firEN ?  last_cofd : next_cofd;
+assign ramd = ~fir_sign ?  last_ramd : next_ramd;
+assign cofd = ~fir_sign ?  last_cofd : next_cofd;
+reg fir_sign_temp2;
 
 always@(posedge axis_clk) begin
+
+    fir_sign_temp2<=fir_sign;
     if(!axis_rst_n)
         sm_tdata_temp<=0;
     else if(sm_tvalid)
         sm_tdata_temp<=0;
-    else if(firEN)
+    else if(fir_sign_temp2)
         sm_tdata_temp <= sm_tdata_temp +(ramd*cofd);
 
 end
